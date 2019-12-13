@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 发送请求
+  const xmlhttp = new XMLHttpRequest()
+  const url = 'http://127.0.0.1:3000/withdraw'
+  xmlhttp.open('POST', url, true)
+  xmlhttp.setRequestHeader('Content-Type', 'application/json')
+  xmlhttp.send(JSON.stringify({"cost": '100'}))
+
+  // 处理响应
+  xmlhttp.onreadystatechange = function () {
+    if(xmlhttp.readyState === 4){
+      if(xmlhttp.status >= 200 && xmlhttp.status < 300 || xmlhttp.status === 304){
+        console.log(xmlhttp.responseText)
+      }
+    }
+  }
+</script>
+</body>
+</html>

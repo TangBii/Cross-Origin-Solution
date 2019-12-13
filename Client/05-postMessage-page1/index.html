@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>page1</title>
+</head>
+<body>
+<script type="text/javascript">
+var otherWindow = window.open('http://127.0.0.1:5000')
+
+ setTimeout(function () {
+   otherWindow.postMessage("从3000发给5000", "http://127.0.0.1:5000")
+   window.addEventListener("message", function (event) {
+     // 增强安全性
+     if(event.origin !== 'http://127.0.0.1:5000') {
+       return
+     }
+     console.log(event.data)
+   })
+ }, 200)
+</script>
+</body>
+</html>

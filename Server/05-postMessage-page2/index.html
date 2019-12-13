@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>page2</title>
+</head>
+<body>
+<script type="text/javascript">
+  window.addEventListener("message", function (event) {
+    // 增强安全性
+    if(event.origin !== 'http://127.0.0.1:3000') {
+      return
+    }
+    console.log(event.data)
+    event.source.postMessage("从5000发给3000",'http://127.0.0.1:3000');
+  })
+</script>
+</body>
+</html>

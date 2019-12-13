@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="setCookie()">设置 Cookie</button>
+<button onclick="sendCookie()">发送Cookie</button>
+<script type="text/javascript">
+
+  function setCookie() {
+    _Ajax('http://127.0.0.1:3000/setCookie', function (res) {
+        alert(res)
+    })
+  }
+
+  function sendCookie() {
+    _Ajax('http://127.0.0.1:3000/account', function (res) {
+      alert(document.cookie.split('=')[1])
+    })
+  }
+
+  // 请求函数
+  function _Ajax(url, callback, method = 'get') {
+    const xmlhttp = new XMLHttpRequest()
+    xmlhttp.open(method, url, true)
+    xmlhttp.withCredentials = true;
+    xmlhttp.send()
+
+    // 处理响应
+    xmlhttp.onreadystatechange = function () {
+      if(xmlhttp.readyState === 4){
+        if(xmlhttp.status >= 200 && xmlhttp.status < 300 || xmlhttp.status === 304){
+          callback(xmlhttp.responseText)
+        }
+      }
+    }
+  }
+
+</script>
+</body>
+</html>
